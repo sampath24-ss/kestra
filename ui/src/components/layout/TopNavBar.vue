@@ -135,12 +135,15 @@
 
 <style lang="scss" scoped>
     nav {
-        top: 0;
         position: sticky;
+        top: 0;
+        flex-wrap: wrap;
+        min-width: min-content;
         z-index: 1000;
-        padding: 1rem 2rem;
-        border-bottom: 1px solid var(--ks-border-primary);
-        background: var(--ks-background-card);
+      
+        padding: var(--spacer) calc(2 * var(--spacer));
+        border-bottom: 1px solid var(--bs-border-color);
+        background: var(--card-bg);
 
         .top-title, h1, .el-breadcrumb {
             white-space: nowrap;
@@ -156,7 +159,7 @@
         }
 
         .star-button{
-            margin-left: 1rem;
+            margin-left: var(--spacer);
             border: none;
         }
 
@@ -183,7 +186,7 @@
                 button, :deep(button), a, :deep(a) {
                     border: none;
                     font-size: var(--font-size-lg);
-                    padding: .25rem;
+                    padding: calc(var(--spacer) / 4);
                 }
             }
 
@@ -192,7 +195,7 @@
                 list-style: none;
                 padding: 0;
                 margin: 0;
-                gap: .5rem;
+                gap: calc(var(--spacer) / 2);
                 align-items: center;
             }
         }

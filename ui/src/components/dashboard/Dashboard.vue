@@ -16,7 +16,7 @@
             :prefix="custom.shown ? 'custom_dashboard' : 'dashboard'"
             :include="
                 custom.shown
-                    ? ['relative_date', 'absolute_date', 'namespace', 'labels']
+                    ? ['relative_date', 'absolute_date']
                     : [
                         'namespace',
                         'state',
@@ -44,7 +44,7 @@
         <el-row class="custom">
             <el-col
                 v-for="(chart, index) in custom.dashboard.charts"
-                :key="index + JSON.stringify(route.query)"
+                :key="index"
                 :xs="24"
                 :sm="12"
             >
@@ -116,7 +116,7 @@
                     :value="numbers.flows"
                     :redirect="{
                         name: 'flows/list',
-                        query: {scope: 'USER', size: 100, page: 1},
+                        query: {scope: 'USER', size: 0, page: 1},
                     }"
                     class="mx-2"
                 />
@@ -136,18 +136,18 @@
         </el-row>
 
         <el-row>
-            <el-col :xs="24" :lg="props.flow ? 24 : 16">
+            <el-col :xs="24" :lg="props.flow ? 24 : 24">
                 <ExecutionsBar
                     :data="graphData"
                     :total="stats.total"
                     :class="{'me-2': !props.flow}"
                 />
             </el-col>
-            <el-col v-if="!props.flow" :xs="24" :lg="8">
+            <el-col v-if="!props.flow" :xs="24" :lg="props.flow ? 24 : 24">
                 <ExecutionsDoughnut
                     :data="graphData"
                     :total="stats.total"
-                    class="ms-2"
+                    class="ms-1"
                 />
             </el-col>
         </el-row>
@@ -186,7 +186,7 @@
                     class="me-2"
                 />
             </el-col>
-            <el-col v-if="props.flow" :xs="24" :lg="10">
+            <el-col v-if="props.flow" :xs="24" :lg="10" :sm="12">
                 <ExecutionsNextScheduled
                     :flow="props.flowID"
                     :namespace="filters.namespace"
@@ -236,7 +236,7 @@
     import moment from "moment";
 
     import {apiUrl} from "override/utils/route";
-    import {State} from "@kestra-io/ui-libs"
+    import State from "../../utils/state";
 
     import Header from "./components/Header.vue";
     import Card from "./components/Card.vue";
@@ -578,12 +578,20 @@ $spacing: 20px;
         width: 100%;
 
         & .el-col {
+            min-width: 250px;
+            min-height: 100px;
+            width: 50%;
+            height: 100%;
             padding-bottom: $spacing;
 
             & div {
-                background: var(--ks-background-card);
-                border: 1px solid var(--ks-border-primary);
+                background: var(--card-bg);
+                border: 1px solid var(--bs-gray-300);
                 border-radius: $border-radius;
+
+                html.dark & {
+                    border-color: var(--bs-gray-600);
+                }
             }
         }
     }
@@ -605,6 +613,7 @@ $spacing: 20px;
 .dashboard-filters {
     margin: 24px 0 0 0;
     padding-bottom: 0;
+    
 
     & .el-row {
         padding: 0 5px;
@@ -618,7 +627,7 @@ $spacing: 20px;
 .description {
     padding: 0px 32px;
     margin: 0;
-    color: var(--ks-content-secondary);
+    color: var(--bs-gray-700);
 }
 
 .custom {
@@ -636,9 +645,13 @@ $spacing: 20px;
 
             & > div {
                 height: 100%;
-                background: var(--ks-background-card);
-                border: 1px solid var(--ks-border-primary);
+                background: var(--card-bg);
+                border: 1px solid var(--bs-gray-300);
                 border-radius: $border-radius;
+
+                html.dark & {
+                    border-color: var(--bs-gray-600);
+                }
             }
         }
     }
@@ -651,11 +664,11 @@ $spacing: 20px;
     }
 
     &::-webkit-scrollbar-track {
-        background: var(--ks-background-card);
+        background: var(--card-bg);
     }
 
     &::-webkit-scrollbar-thumb {
-        background: var(--ks-button-background-primary);
+        background: var(--bs-primary);
         border-radius: 0px;
     }
 }
