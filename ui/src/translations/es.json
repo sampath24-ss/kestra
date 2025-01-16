@@ -677,7 +677,8 @@
             "log_level": "Nivel de Log Predeterminado",
             "log_display": "Visualización de Log Predeterminada",
             "execute_flow": "Ejecutar el Flow",
-            "execute_default_tab": "Pestaña de Ejecución Predeterminada"
+            "execute_default_tab": "Pestaña de Ejecución Predeterminada",
+            "editor_type": "Tipo de Editor Predeterminado"
           }
         },
         "theme": {
@@ -873,7 +874,7 @@
       "see_all": "Ver todo",
       "success_ratio_tooltip": "La Tasa de Éxito es la suma de ejecuciones en estado SUCCESS, CANCELLED y WARNING dividida por el número total de ejecuciones en un estado terminado.",
       "failure_ratio_tooltip": "La proporción de Failed es la suma de ejecuciones FAILED, KILLED y RETRIED dividida por el número total de ejecuciones en un estado terminado.",
-      "preview": "Vista previa del Dashboard"
+      "preview": "Vista previa del dashboard"
     },
     "delete_log": "¿Está seguro de que desea eliminar el log?",
     "docs": "Documentos",
@@ -1043,6 +1044,47 @@
     "source only": "Solo fuente",
     "chart preview": "Vista previa del gráfico",
     "execution replayed": "Esta ejecución ha sido reproducida.",
-    "execution replay": "Esta ejecución es una repetición de <code>{originalId}</code>."
+    "execution replay": "Esta ejecución es una repetición de <code>{originalId}</code>.",
+    "no_code": {
+      "fields": {
+        "main": {
+          "description": "Descripción",
+          "namespace": "Namespace",
+          "flow_id": "ID de Flow"
+        },
+        "general": {
+          "plugin_defaults": "Valores Predeterminados del Plugin",
+          "variables": "Variables",
+          "labels": "Etiquetas",
+          "outputs": "Salidas",
+          "concurrency": "Concurrente",
+          "inputs": "Entradas",
+          "retry": "Reintentar",
+          "disabled": "Desactivado"
+        }
+      },
+      "sections": {
+        "general": "Propiedades generales",
+        "triggers": "Disparadores",
+        "main": "Propiedades principales",
+        "error_handlers": "Manejadores de Errores",
+        "tasks": "Tareas"
+      },
+      "creation": {
+        "select": "Seleccione una {section}",
+        "tasks": "Agregar una task",
+        "error handlers": "Agregar un manejador de errores",
+        "triggers": "Agregar un trigger"
+      },
+      "save": {
+        "tasks": "Guardar tarea",
+        "triggers": "Guardar trigger"
+      },
+      "labels": {
+        "no_code": "Editor Sin Código",
+        "yaml": "Editor YAML"
+      },
+      "adding": "+ Agregar un {what}"
+    }
   }
 }

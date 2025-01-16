@@ -677,7 +677,8 @@
             "log_level": "Niveau d'affichage des journaux par défaut",
             "log_display": "Affichage des journaux par défaut",
             "execute_flow": "Exécuter le flow",
-            "execute_default_tab": "Onglet d'exécution par défaut"
+            "execute_default_tab": "Onglet d'exécution par défaut",
+            "editor_type": "Type d'Éditeur par Défaut"
           }
         },
         "theme": {
@@ -1043,6 +1044,47 @@
     "source only": "Source uniquement",
     "chart preview": "Aperçu du graphique",
     "execution replayed": "Cette exécution a été rejouée.",
-    "execution replay": "Cette exécution est une relecture de <code>{originalId}</code>."
+    "execution replay": "Cette exécution est une relecture de <code>{originalId}</code>.",
+    "no_code": {
+      "fields": {
+        "main": {
+          "description": "Description",
+          "namespace": "Namespace",
+          "flow_id": "ID de Flow"
+        },
+        "general": {
+          "plugin_defaults": "Paramètres par défaut du Plugin",
+          "variables": "Variables",
+          "labels": "Étiquettes",
+          "outputs": "Sorties",
+          "concurrency": "Concurrence",
+          "inputs": "Entrées",
+          "retry": "Réessayer",
+          "disabled": "Désactivé"
+        }
+      },
+      "sections": {
+        "general": "Propriétés générales",
+        "triggers": "Déclencheurs",
+        "main": "Principales propriétés",
+        "error_handlers": "Gestionnaires d'erreurs",
+        "tasks": "Tâches"
+      },
+      "creation": {
+        "select": "Sélectionnez une {section}",
+        "tasks": "Ajouter une tâche",
+        "error handlers": "Ajouter un gestionnaire d'erreurs",
+        "triggers": "Ajouter un trigger"
+      },
+      "save": {
+        "tasks": "Enregistrer la tâche",
+        "triggers": "Enregistrer le trigger"
+      },
+      "labels": {
+        "no_code": "Éditeur sans code",
+        "yaml": "Éditeur YAML"
+      },
+      "adding": "+ Ajouter un {what}"
+    }
   }
 }

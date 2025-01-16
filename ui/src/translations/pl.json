@@ -677,7 +677,8 @@
             "log_level": "Domyślna Poziom Logs",
             "log_display": "Domyślne Wyświetlanie Log",
             "execute_flow": "Wykonaj Flow",
-            "execute_default_tab": "Domyślna karta Execution"
+            "execute_default_tab": "Domyślna karta Execution",
+            "editor_type": "Domyślny typ edytora"
           }
         },
         "theme": {
@@ -873,7 +874,7 @@
       "see_all": "Zobacz wszystkie",
       "success_ratio_tooltip": "Wskaźnik Sukcesu to suma wykonań w stanach SUCCESS, CANCELLED i WARNING podzielona przez całkowitą liczbę wykonań w stanie zakończonym.",
       "failure_ratio_tooltip": "Stosunek niepowodzeń to suma wykonań w stanach FAILED, KILLED i RETRIED podzielona przez całkowitą liczbę wykonań w stanie zakończonym.",
-      "preview": "Podgląd dashboardu"
+      "preview": "Podgląd Dashboardu"
     },
     "delete_log": "Czy na pewno chcesz usunąć log?",
     "docs": "Dokumentacja",
@@ -1043,6 +1044,47 @@
     "source only": "Tylko źródło",
     "chart preview": "Podgląd wykresu",
     "execution replayed": "To wykonanie zostało odtworzone.",
-    "execution replay": "To wykonanie jest powtórką <code>{originalId}</code>."
+    "execution replay": "To wykonanie jest powtórką <code>{originalId}</code>.",
+    "no_code": {
+      "fields": {
+        "main": {
+          "description": "Opis",
+          "namespace": "Namespace",
+          "flow_id": "Identyfikator flow"
+        },
+        "general": {
+          "plugin_defaults": "Domyślne ustawienia pluginu",
+          "variables": "Zmienne",
+          "labels": "Etykiety",
+          "outputs": "Wyjścia",
+          "concurrency": "Współbieżność",
+          "inputs": "Wejścia",
+          "retry": "Ponów próbę",
+          "disabled": "Wyłączony"
+        }
+      },
+      "sections": {
+        "general": "Właściwości ogólne",
+        "triggers": "Triggery",
+        "main": "Główne właściwości",
+        "error_handlers": "Obsługa błędów",
+        "tasks": "Zadania"
+      },
+      "creation": {
+        "select": "Wybierz {section}",
+        "tasks": "Dodaj task",
+        "error handlers": "Dodaj obsługę błędów",
+        "triggers": "Dodaj trigger"
+      },
+      "save": {
+        "tasks": "Zapisz task",
+        "triggers": "Zapisz trigger"
+      },
+      "labels": {
+        "no_code": "Edytor No Code",
+        "yaml": "Edytor YAML"
+      },
+      "adding": "+ Dodaj {what}"
+    }
   }
 }

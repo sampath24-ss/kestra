@@ -99,6 +99,15 @@ public class If extends Task implements FlowableTask<If.Output> {
     )
     private List<Task> errors;
 
+    @Valid
+    @JsonProperty("finally")
+    @Getter(AccessLevel.NONE)
+    protected List<Task> _finally;
+
+    public List<Task> getFinally() {
+        return this._finally;
+    }
+
     @Override
     public List<Task> getErrors() {
         return errors;
@@ -112,6 +121,7 @@ public class If extends Task implements FlowableTask<If.Output> {
             subGraph,
             this.then,
             this._else,
+            this._finally,
             this.errors,
             taskRun,
             execution
@@ -127,7 +137,11 @@ public class If extends Task implements FlowableTask<If.Output> {
                 this.then != null ? this.then.stream() : Stream.empty(),
                 Stream.concat(
                     this._else != null ? this._else.stream() : Stream.empty(),
-                    this.errors != null ? this.errors.stream() : Stream.empty())
+                    Stream.concat(
+                        this.errors != null ? this.errors.stream() : Stream.empty(),
+                        this._finally != null ? this._finally.stream() : Stream.empty()
+                    )
+                )
             )
             .toList();
     }
@@ -157,6 +171,7 @@ public class If extends Task implements FlowableTask<If.Output> {
             execution,
             this.childTasks(runContext, parentTaskRun),
             FlowableUtils.resolveTasks(this.errors, parentTaskRun),
+            FlowableUtils.resolveTasks(this._finally, parentTaskRun),
             parentTaskRun
         );
     }
@@ -175,6 +190,7 @@ public class If extends Task implements FlowableTask<If.Output> {
             execution,
             childTasks,
             FlowableUtils.resolveTasks(this.getErrors(), parentTaskRun),
+            FlowableUtils.resolveTasks(this.getFinally(), parentTaskRun),
             parentTaskRun,
             runContext,
             this.isAllowFailure(),

@@ -677,7 +677,8 @@
             "log_level": "Log स्तर",
             "log_display": "Log प्रदर्शन",
             "execute_flow": "Flow निष्पादित करें",
-            "execute_default_tab": "डिफ़ॉल्ट Execution टैब"
+            "execute_default_tab": "डिफ़ॉल्ट Execution टैब",
+            "editor_type": "डिफ़ॉल्ट एडिटर प्रकार"
           }
         },
         "theme": {
@@ -1043,6 +1044,47 @@
     "source only": "केवल स्रोत",
     "chart preview": "चार्ट पूर्वावलोकन",
     "execution replayed": "इस execution को पुनः चलाया गया है।",
-    "execution replay": "यह execution <code>{originalId}</code> का पुनरावर्तन है।"
+    "execution replay": "यह निष्पादन <code>{originalId}</code> का पुन: प्ले है।",
+    "no_code": {
+      "fields": {
+        "main": {
+          "description": "विवरण",
+          "namespace": "Namespace",
+          "flow_id": "फ्लो ID"
+        },
+        "general": {
+          "plugin_defaults": "प्लगइन डिफॉल्ट्स",
+          "variables": "वेरिएबल्स",
+          "labels": "लेबल्स",
+          "outputs": "आउटपुट्स",
+          "concurrency": "समानांतरता",
+          "inputs": "इनपुट्स",
+          "retry": "पुनः प्रयास करें",
+          "disabled": "अक्षम"
+        }
+      },
+      "sections": {
+        "general": "सामान्य गुणधर्म",
+        "triggers": "ट्रिगर्स",
+        "main": "मुख्य गुणधर्म",
+        "error_handlers": "त्रुटि हैंडलर",
+        "tasks": "कार्य"
+      },
+      "creation": {
+        "select": "किसी {section} का चयन करें",
+        "tasks": "कार्य जोड़ें",
+        "error handlers": "त्रुटि हैंडलर जोड़ें",
+        "triggers": "ट्रिगर जोड़ें"
+      },
+      "save": {
+        "tasks": "कार्य सहेजें",
+        "triggers": "ट्रिगर सहेजें"
+      },
+      "labels": {
+        "no_code": "कोड संपादक नहीं",
+        "yaml": "YAML संपादक"
+      },
+      "adding": "+ एक {what} जोड़ें"
+    }
   }
 }

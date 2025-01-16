@@ -677,7 +677,8 @@
             "log_level": "默认日志级别",
             "log_display": "默认日志显示",
             "execute_flow": "执行流程",
-            "execute_default_tab": "默认执行选项卡"
+            "execute_default_tab": "默认执行选项卡",
+            "editor_type": "默认编辑器类型"
           }
         },
         "theme": {
@@ -1043,6 +1044,47 @@
     "source only": "仅限来源",
     "chart preview": "图表预览",
     "execution replayed": "此执行已被重放。",
-    "execution replay": "此执行是 <code>{originalId}</code> 的重放。"
+    "execution replay": "此执行是对<code>{originalId}</code>的重放。",
+    "no_code": {
+      "fields": {
+        "main": {
+          "description": "描述",
+          "namespace": "命名空间",
+          "flow_id": "Flow ID"
+        },
+        "general": {
+          "plugin_defaults": "插件默认值",
+          "variables": "变量",
+          "labels": "标签",
+          "outputs": "输出",
+          "concurrency": "并发性",
+          "inputs": "输入",
+          "retry": "重试",
+          "disabled": "禁用"
+        }
+      },
+      "sections": {
+        "general": "常规属性",
+        "triggers": "触发器",
+        "main": "主要属性",
+        "error_handlers": "错误处理程序",
+        "tasks": "任务"
+      },
+      "creation": {
+        "select": "选择一个{section}",
+        "tasks": "添加任务",
+        "error handlers": "添加错误处理程序",
+        "triggers": "添加一个trigger"
+      },
+      "save": {
+        "tasks": "保存任务",
+        "triggers": "保存 trigger"
+      },
+      "labels": {
+        "no_code": "无代码编辑器",
+        "yaml": "YAML编辑器"
+      },
+      "adding": "+ 添加{what}"
+    }
   }
 }

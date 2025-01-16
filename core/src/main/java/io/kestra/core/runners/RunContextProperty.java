@@ -52,9 +52,9 @@ public class RunContextProperty<T> {
             validate(task);
         } else if (trigger != null) {
             validate(trigger);
-        } else {
-            // this should never happen, but if it happens, we may lower to debug
-            log.warn("Unable to do validation: no task or trigger found");
+        } else if (log.isTraceEnabled()) {
+            // this should never happen, but it happens a lot on unit test
+            log.trace("Unable to do validation: no task or trigger found");
         }
     }
 

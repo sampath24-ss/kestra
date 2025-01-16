@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.google.common.annotations.VisibleForTesting;
 import io.kestra.core.exceptions.IllegalVariableEvaluationException;
 import io.kestra.core.runners.RunContext;
 import io.kestra.core.serializers.JacksonMapper;
@@ -41,10 +40,16 @@ public class Property<T> {
     private String expression;
     private T value;
 
-    // used only by the deserializer and in tests
-    @VisibleForTesting
     public Property(String expression) {
         this.expression = expression;
+    }
+
+    public Property(Map<?, ?> map) {
+        try {
+            expression = MAPPER.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     /**

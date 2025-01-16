@@ -677,7 +677,8 @@
             "log_level": "기본 Log 레벨",
             "log_display": "기본 Log 표시",
             "execute_flow": "Flow 실행",
-            "execute_default_tab": "기본 실행 탭"
+            "execute_default_tab": "기본 실행 탭",
+            "editor_type": "기본 편집기 유형"
           }
         },
         "theme": {
@@ -1042,7 +1043,48 @@
     "chart": "차트",
     "source only": "소스 전용",
     "chart preview": "차트 미리보기",
-    "execution replayed": "이 실행은 재생되었습니다.",
-    "execution replay": "이 실행은 <code>{originalId}</code>의 재실행입니다."
+    "execution replayed": "이 실행은 재실행되었습니다.",
+    "execution replay": "이 실행은 <code>{originalId}</code>의 재실행입니다.",
+    "no_code": {
+      "fields": {
+        "main": {
+          "description": "설명",
+          "namespace": "네임스페이스",
+          "flow_id": "플로우 ID"
+        },
+        "general": {
+          "plugin_defaults": "플러그인 기본값",
+          "variables": "변수",
+          "labels": "레이블",
+          "outputs": "출력",
+          "concurrency": "병행성",
+          "inputs": "입력",
+          "retry": "재시도",
+          "disabled": "비활성화됨"
+        }
+      },
+      "sections": {
+        "general": "일반 속성",
+        "triggers": "트리거",
+        "main": "주요 속성",
+        "error_handlers": "오류 처리기",
+        "tasks": "작업"
+      },
+      "creation": {
+        "select": "{section}을 선택하십시오",
+        "tasks": "작업 추가",
+        "error handlers": "오류 처리기 추가",
+        "triggers": "트리거 추가"
+      },
+      "save": {
+        "tasks": "작업 저장",
+        "triggers": "트리거 저장"
+      },
+      "labels": {
+        "no_code": "코드 없는 편집기",
+        "yaml": "YAML 편집기"
+      },
+      "adding": "+ {what} 추가"
+    }
   }
 }

@@ -677,7 +677,8 @@
             "log_level": "デフォルトLogレベル",
             "log_display": "デフォルトLog表示",
             "execute_flow": "Flowを実行",
-            "execute_default_tab": "デフォルト実行タブ"
+            "execute_default_tab": "デフォルト実行タブ",
+            "editor_type": "デフォルトエディタータイプ"
           }
         },
         "theme": {
@@ -1043,6 +1044,47 @@
     "source only": "ソースのみ",
     "chart preview": "チャートプレビュー",
     "execution replayed": "この実行は再実行されました。",
-    "execution replay": "この実行は<code>{originalId}</code>のリプレイです。"
+    "execution replay": "この実行は<code>{originalId}</code>のリプレイです。",
+    "no_code": {
+      "fields": {
+        "main": {
+          "description": "説明",
+          "namespace": "Namespace（ネームスペース）",
+          "flow_id": "フローID"
+        },
+        "general": {
+          "plugin_defaults": "プラグインデフォルト",
+          "variables": "変数",
+          "labels": "ラベル",
+          "outputs": "出力",
+          "concurrency": "並行性",
+          "inputs": "入力",
+          "retry": "リトライ",
+          "disabled": "無効"
+        }
+      },
+      "sections": {
+        "general": "一般プロパティ",
+        "triggers": "トリガー",
+        "main": "メインプロパティ",
+        "error_handlers": "エラーハンドラー",
+        "tasks": "タスク"
+      },
+      "creation": {
+        "select": "{section}を選択してください",
+        "tasks": "タスクを追加",
+        "error handlers": "エラーハンドラーを追加",
+        "triggers": "トリガーを追加"
+      },
+      "save": {
+        "tasks": "タスクを保存",
+        "triggers": "トリガーを保存"
+      },
+      "labels": {
+        "no_code": "コードエディタなし",
+        "yaml": "YAMLエディター"
+      },
+      "adding": "+ {what}を追加"
+    }
   }
 }

@@ -157,6 +157,9 @@
     import ChartBar from "vue-material-design-icons/ChartBar.vue";
     import FileDocumentEditOutline from "vue-material-design-icons/FileDocumentEditOutline.vue";
     import ViewDashboard from "vue-material-design-icons/ViewDashboard.vue";
+
+    // avoid an eslint warning about missing declaration
+    defineEmits(["save"])
 </script>
 <script>
     import Editor from "../../inputs/Editor.vue";
@@ -186,7 +189,6 @@
                 return this.currentView !== this.views.NONE && this.currentView !== this.views.DASHBOARD;
             }
         },
-        emits: ["save"],
         props: {
             allowSaveUnchanged: {
                 type: Boolean,

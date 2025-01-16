@@ -418,6 +418,7 @@
 
         getTaskIcons(store.state.execution?.flow?.tasks || [], mapped);
         getTaskIcons(store.state.execution?.flow?.errors || [], mapped);
+        getTaskIcons(store.state.execution?.flow?.finally || [], mapped);
 
         return mapped;
     });

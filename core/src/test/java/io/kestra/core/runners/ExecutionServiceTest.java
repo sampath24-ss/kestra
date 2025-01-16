@@ -9,6 +9,7 @@ import io.kestra.core.models.executions.Execution;
 import io.kestra.core.models.flows.Flow;
 import io.kestra.core.models.flows.FlowWithSource;
 import io.kestra.core.models.flows.State;
+import io.kestra.core.models.property.Property;
 import io.kestra.core.repositories.ExecutionRepositoryInterface;
 import io.kestra.core.repositories.FlowRepositoryInterface;
 import io.kestra.core.repositories.LogRepositoryInterface;
@@ -83,7 +84,7 @@ class ExecutionServiceTest {
                 Return.builder()
                     .id("a")
                     .type(Return.class.getName())
-                    .format("replace")
+                    .format(Property.of("replace"))
                     .build()
             ),
             JacksonMapper.ofYaml().writeValueAsString(flow),

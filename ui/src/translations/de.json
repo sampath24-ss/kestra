@@ -677,7 +677,8 @@
             "log_level": "Standard-Log-Ebene",
             "log_display": "Standard-Log-Anzeige",
             "execute_flow": "Flow ausführen",
-            "execute_default_tab": "Standard-Ausführungs-Registerkarte"
+            "execute_default_tab": "Standard-Ausführungs-Registerkarte",
+            "editor_type": "Standard-Editor-Typ"
           }
         },
         "theme": {
@@ -1043,6 +1044,47 @@
     "source only": "Nur Quelle",
     "chart preview": "Diagrammvorschau",
     "execution replayed": "Diese Ausführung wurde erneut abgespielt.",
-    "execution replay": "Diese Ausführung ist eine Wiederholung von <code>{originalId}</code>."
+    "execution replay": "Diese Ausführung ist eine Wiederholung von <code>{originalId}</code>.",
+    "no_code": {
+      "fields": {
+        "main": {
+          "description": "Beschreibung",
+          "namespace": "Namespace",
+          "flow_id": "Flow-ID"
+        },
+        "general": {
+          "plugin_defaults": "Plugin-Standardeinstellungen",
+          "variables": "Variablen",
+          "labels": "Labels",
+          "outputs": "Ausgaben",
+          "concurrency": "Nebenläufigkeit",
+          "inputs": "Eingaben",
+          "retry": "Wiederholen",
+          "disabled": "Deaktiviert"
+        }
+      },
+      "sections": {
+        "general": "Allgemeine Eigenschaften",
+        "triggers": "Trigger",
+        "main": "Haupteigenschaften",
+        "error_handlers": "Fehlerbehandler",
+        "tasks": "Aufgaben"
+      },
+      "creation": {
+        "select": "Wählen Sie einen {section} aus",
+        "tasks": "Aufgabe hinzufügen",
+        "error handlers": "Fügen Sie einen Fehlerhandler hinzu",
+        "triggers": "Füge einen Trigger hinzu"
+      },
+      "save": {
+        "tasks": "Aufgabe speichern",
+        "triggers": "Speicher Trigger"
+      },
+      "labels": {
+        "no_code": "Kein Code-Editor",
+        "yaml": "YAML-Editor"
+      },
+      "adding": "+ {what} hinzufügen"
+    }
   }
 }

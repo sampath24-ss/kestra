@@ -1,5 +1,6 @@
 package io.kestra.plugin.core.flow;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.kestra.core.exceptions.IllegalVariableEvaluationException;
@@ -33,11 +34,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.io.*;
@@ -317,6 +314,15 @@ public class ForEachItem extends Task implements FlowableTask<VoidOutput>, Child
     @Valid
     private List<Task> errors;
 
+    @Valid
+    @JsonProperty("finally")
+    @Getter(AccessLevel.NONE)
+    protected List<Task> _finally;
+
+    public List<Task> getFinally() {
+        return this._finally;
+    }
+
     @Schema(
         title = "What to do when a failed execution is restarting.",
         description = """
@@ -336,6 +342,7 @@ public class ForEachItem extends Task implements FlowableTask<VoidOutput>, Child
             subGraph,
             this.getTasks(),
             this.errors,
+            this._finally,
             taskRun,
             execution
         );
@@ -348,7 +355,10 @@ public class ForEachItem extends Task implements FlowableTask<VoidOutput>, Child
         return Stream
             .concat(
                 this.getTasks() != null ? this.getTasks().stream() : Stream.empty(),
-                this.errors != null ? this.errors.stream() : Stream.empty()
+                Stream.concat(
+                    this.errors != null ? this.errors.stream() : Stream.empty(),
+                    this._finally != null ? this._finally.stream() : Stream.empty()
+                )
             )
             .toList();
     }
@@ -364,6 +374,7 @@ public class ForEachItem extends Task implements FlowableTask<VoidOutput>, Child
             execution,
             this.childTasks(runContext, parentTaskRun),
             FlowableUtils.resolveTasks(this.errors, parentTaskRun),
+            FlowableUtils.resolveTasks(this._finally, parentTaskRun),
             parentTaskRun
         );
     }

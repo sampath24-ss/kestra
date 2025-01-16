@@ -299,7 +299,7 @@
                     params: {
                         namespace: "tutorial",
                         id: flows.value[activeFlow.value]?.id,
-                        tab: "editor",
+                        tab: "edit",
                     },
                 });
                 store.commit("core/setGuidedProperties", {

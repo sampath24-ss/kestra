@@ -744,6 +744,7 @@
             "default_namespace": "Default Namespace",
             "log_level": "Default Log Level",
             "log_display": "Default Log Display",
+            "editor_type": "Default Editor Type",
             "execute_flow": "Execute the Flow",
             "execute_default_tab": "Default Execution Tab"
           }
@@ -942,10 +943,10 @@
     "behavior": "Behavior",
     "concurrency": "Concurrency",
     "no-executions-view": {
-        "title": "Start automating with ",
-        "sub_title": "Click on the Execute button to start your first workflow execution.",
-        "guidance_desc": "Need guidance to execute your flow?",
-        "guidance_sub_desc": "Follow the documentation for all the info you need."
+      "title": "Start automating with ",
+      "sub_title": "Click on the Execute button to start your first workflow execution.",
+      "guidance_desc": "Need guidance to execute your flow?",
+      "guidance_sub_desc": "Follow the documentation for all the info you need."
     },
     "execution_guide": {
       "get_started": {
@@ -1058,6 +1059,47 @@
     },
     "custom value": "Custom value",
     "chart": "Chart",
-    "chart preview": "Chart preview"
+    "chart preview": "Chart preview",
+    "no_code": {
+      "adding": "+ Add a {what}",
+      "labels": {
+        "yaml": "YAML Editor",
+        "no_code": "No Code Editor"
+      },
+      "sections": {
+        "main": "Main properties",
+        "general": "General properties",
+        "tasks": "Tasks",
+        "triggers": "Triggers",
+        "error_handlers": "Error Handlers"
+      },
+      "fields": {
+        "main": {
+          "flow_id": "Flow ID",
+          "namespace": "Namespace",
+          "description": "Description"
+        },
+        "general": {
+          "retry": "Retry",
+          "labels": "Labels",
+          "inputs": "Inputs",
+          "outputs": "Outputs",
+          "variables": "Variables",
+          "concurrency": "Concurrency",
+          "plugin_defaults": "Plugin Defaults",
+          "disabled": "Disabled"
+        }
+      },
+      "creation": {
+        "tasks": "Add a task",
+        "triggers": "Add a trigger",
+        "error handlers": "Add an error handler",
+        "select": "Select a {section}"
+      },
+      "save": {
+        "tasks": "Save task",
+        "triggers": "Save trigger"
+      }
+    }
   }
 }
