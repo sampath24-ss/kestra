@@ -16,7 +16,7 @@
             :prefix="custom.shown ? 'custom_dashboard' : 'dashboard'"
             :include="
                 custom.shown
-                    ? ['relative_date', 'absolute_date']
+                    ? ['relative_date', 'absolute_date', 'namespace', 'labels']
                     : [
                         'namespace',
                         'state',
@@ -44,7 +44,7 @@
         <el-row class="custom">
             <el-col
                 v-for="(chart, index) in custom.dashboard.charts"
-                :key="index"
+                :key="index + JSON.stringify(route.query)"
                 :xs="24"
                 :sm="12"
             >
@@ -72,7 +72,7 @@
         </el-row>
     </div>
     <div v-else class="dashboard">
-        <el-row v-if="!props.flow">
+        <el-row v-if="!props.flow" class="dashboard-row">
             <el-col :xs="24" :sm="12" :lg="6">
                 <Card
                     :icon="CheckBold"
@@ -116,7 +116,7 @@
                     :value="numbers.flows"
                     :redirect="{
                         name: 'flows/list',
-                        query: {scope: 'USER', size: 0, page: 1},
+                        query: {scope: 'USER', size: 100, page: 1},
                     }"
                     class="mx-2"
                 />
@@ -136,14 +136,14 @@
         </el-row>
 
         <el-row>
-            <el-col :xs="24" :lg="props.flow ? 24 : 24">
+            <el-col :xs="24" :lg="props.flow ? 7 : 24">
                 <ExecutionsBar
                     :data="graphData"
                     :total="stats.total"
                     :class="{'me-2': !props.flow}"
                 />
             </el-col>
-            <el-col v-if="!props.flow" :xs="24" :lg="props.flow ? 24 : 24">
+            <el-col v-if="!props.flow" :xs="24" :lg="props.flow ? 7 : 24">
                 <ExecutionsDoughnut
                     :data="graphData"
                     :total="stats.total"
@@ -236,7 +236,7 @@
     import moment from "moment";
 
     import {apiUrl} from "override/utils/route";
-    import State from "../../utils/state";
+    import {State} from "@kestra-io/ui-libs"
 
     import Header from "./components/Header.vue";
     import Card from "./components/Card.vue";
@@ -572,26 +572,25 @@ $spacing: 20px;
 
 .dashboard-filters,
 .dashboard {
-    padding: 0 32px;
+    padding: 0 10px;
 
+    & .dashboard-row {
+        display: flex;
+        justify-content: stretch;
+        align-items: stretch;
+        flex-wrap: wrap;
+        gap: 0; 
+    }
     & .el-row {
         width: 100%;
 
         & .el-col {
-            min-width: 250px;
-            min-height: 100px;
-            width: 50%;
-            height: 100%;
+            min-width: 200px;
             padding-bottom: $spacing;
-
             & div {
-                background: var(--card-bg);
-                border: 1px solid var(--bs-gray-300);
+                background: var(--ks-background-card);
+                border: 1px solid var(--ks-border-primary);
                 border-radius: $border-radius;
-
-                html.dark & {
-                    border-color: var(--bs-gray-600);
-                }
             }
         }
     }
@@ -613,7 +612,6 @@ $spacing: 20px;
 .dashboard-filters {
     margin: 24px 0 0 0;
     padding-bottom: 0;
-    
 
     & .el-row {
         padding: 0 5px;
@@ -627,7 +625,7 @@ $spacing: 20px;
 .description {
     padding: 0px 32px;
     margin: 0;
-    color: var(--bs-gray-700);
+    color: var(--ks-content-secondary);
 }
 
 .custom {
@@ -645,13 +643,9 @@ $spacing: 20px;
 
             & > div {
                 height: 100%;
-                background: var(--card-bg);
-                border: 1px solid var(--bs-gray-300);
+                background: var(--ks-background-card);
+                border: 1px solid var(--ks-border-primary);
                 border-radius: $border-radius;
-
-                html.dark & {
-                    border-color: var(--bs-gray-600);
-                }
             }
         }
     }
@@ -664,11 +658,11 @@ $spacing: 20px;
     }
 
     &::-webkit-scrollbar-track {
-        background: var(--card-bg);
+        background: var(--ks-background-card);
     }
 
     &::-webkit-scrollbar-thumb {
-        background: var(--bs-primary);
+        background: var(--ks-button-background-primary);
         border-radius: 0px;
     }
 }
