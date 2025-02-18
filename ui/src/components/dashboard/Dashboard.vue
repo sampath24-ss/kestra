@@ -23,7 +23,7 @@
                         'scope',
                         'relative_date',
                         'absolute_date',
-                    ]
+                    ]  
             "
             :buttons="{
                 refresh: {
@@ -120,7 +120,7 @@
                     }"
                     class="mx-2"
                 />
-            </el-col>
+            </el-col>S
             <el-col :xs="24" :sm="12" :lg="6">
                 <Card
                     :icon="LightningBolt"
