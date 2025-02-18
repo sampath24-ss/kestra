@@ -1,6 +1,7 @@
 package io.kestra.core.http;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.kestra.core.runners.RunContext;
 import io.kestra.core.serializers.JacksonMapper;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -93,7 +94,7 @@ public class HttpRequest {
             .build();
     }
 
-    public HttpUriRequest to() throws IOException {
+    public HttpUriRequest to(RunContext runContext) throws IOException {
         HttpUriRequestBase builder = new HttpUriRequestBase(this.method, this.uri);
 
         // headers
@@ -102,6 +103,10 @@ public class HttpRequest {
                 .forEach((key, value) -> value
                     .forEach(headerValue -> builder.addHeader(key, headerValue))
                 );
+        }
+
+        if (runContext.getTraceParent() != null) {
+            builder.addHeader("traceparent", runContext.getTraceParent());
         }
 
         // body
@@ -137,12 +142,18 @@ public class HttpRequest {
     public abstract static class RequestBody {
         public abstract HttpEntity to() throws IOException;
 
+        public abstract Object getContent() throws IOException;
+
+        public abstract Charset getCharset() throws IOException;
+
+        public abstract String getContentType() throws IOException;
+
         public static RequestBody from(HttpEntity entity) throws IOException {
             if (entity == null) {
                 return null;
             }
 
-            Charset charset = Charset.forName(entity.getContentEncoding());
+            Charset charset = entity.getContentEncoding() != null ? Charset.forName(entity.getContentEncoding()) : StandardCharsets.UTF_8;
 
             if (entity.getContentType().equals(ContentType.APPLICATION_OCTET_STREAM.getMimeType())) {
                 return ByteArrayRequestBody.builder()
@@ -167,10 +178,15 @@ public class HttpRequest {
                     .build();
             }
 
-            throw new IllegalArgumentException("Unsupported Content-Type: " + entity.getContentType());
+            return ByteArrayRequestBody.builder()
+                .charset(charset)
+                .contentType(entity.getContentType())
+                .content(entity.getContent().readAllBytes())
+                .build();
         }
     }
 
+    @Getter
     @AllArgsConstructor
     @SuperBuilder
     public static class InputStreamRequestBody extends RequestBody {
@@ -187,6 +203,7 @@ public class HttpRequest {
         }
     }
 
+    @Getter
     @AllArgsConstructor
     @SuperBuilder
     public static class StringRequestBody extends RequestBody {
@@ -203,6 +220,7 @@ public class HttpRequest {
         }
     }
 
+    @Getter
     @AllArgsConstructor
     @SuperBuilder
     public static class ByteArrayRequestBody extends RequestBody {
@@ -219,6 +237,7 @@ public class HttpRequest {
         }
     }
 
+    @Getter
     @AllArgsConstructor
     @SuperBuilder
     public static class JsonRequestBody extends RequestBody {
@@ -226,6 +245,11 @@ public class HttpRequest {
         private Charset charset = StandardCharsets.UTF_8;
 
         private Object content;
+
+        @Override
+        public String getContentType() throws IOException {
+            return ContentType.APPLICATION_JSON.getMimeType();
+        }
 
         public HttpEntity to() throws IOException {
             try {
@@ -239,6 +263,7 @@ public class HttpRequest {
         }
     }
 
+    @Getter
     @AllArgsConstructor
     @SuperBuilder
     public static class UrlEncodedRequestBody extends RequestBody {
@@ -246,6 +271,11 @@ public class HttpRequest {
         private Charset charset = StandardCharsets.UTF_8;
 
         private Map<String, Object> content;
+
+        @Override
+        public String getContentType() throws IOException {
+            return ContentType.APPLICATION_FORM_URLENCODED.getMimeType();
+        }
 
         public HttpEntity to() throws IOException {
             return new UrlEncodedFormEntity(
@@ -258,6 +288,7 @@ public class HttpRequest {
         }
     }
 
+    @Getter
     @AllArgsConstructor
     @SuperBuilder
     public static class MultipartRequestBody extends RequestBody {
@@ -265,6 +296,11 @@ public class HttpRequest {
         private Charset charset = StandardCharsets.UTF_8;
 
         private Map<String, Object> content;
+
+        @Override
+        public String getContentType() throws IOException {
+            return ContentType.MULTIPART_MIXED.getMimeType();
+        }
 
         public HttpEntity to() throws IOException {
             MultipartEntityBuilder builder = MultipartEntityBuilder

@@ -15,12 +15,12 @@
                 </template>
 
                 <template v-if="showStatChart()" #top>
-                    <el-card shadow="never" class="mb-3" v-loading="!statsReady">
+                    <el-card class="mb-3 shadow" v-loading="!statsReady">
                         <div>
                             <template v-if="hasStatsData">
                                 <Logs :data="logDaily" />
                             </template>
-                            <NoData v-else />
+                            <LogsNoData v-else />
                         </div>
                     </el-card>
                 </template>
@@ -28,14 +28,14 @@
                 <template #table v-if="logs !== undefined && logs.length > 0">
                     <div v-loading="isLoading">
                         <div class="logs-wrapper">
-                            <template v-for="(log, i) in logs" :key="`${log.taskRunId}-${i}`">
-                                <log-line
-                                    level="TRACE"
-                                    filter=""
-                                    :exclude-metas="isFlowEdit ? ['namespace', 'flowId'] : []"
-                                    :log="log"
-                                />
-                            </template>
+                            <log-line
+                                v-for="(log, i) in logs"
+                                :key="`${log.taskRunId}-${i}`"
+                                level="TRACE"
+                                filter=""
+                                :exclude-metas="isFlowEdit ? ['namespace', 'flowId'] : []"
+                                :log="log"
+                            />
                         </div>
                     </div>
                 </template>
@@ -52,7 +52,7 @@
     import RestoreUrl from "../../mixins/restoreUrl";
     import DataTableActions from "../../mixins/dataTableActions";
     import DataTable from "../../components/layout/DataTable.vue";
-    import NoData from "../layout/NoData.vue";
+    import LogsNoData from "../dashboard/components/charts/logs/LogsNoData.vue";
     import _merge from "lodash/merge";
     import Logs from "../dashboard/components/charts/logs/Bar.vue";
     import {storageKeys} from "../../utils/constants";
@@ -62,7 +62,7 @@
         mixins: [RouteContext, RestoreUrl, DataTableActions],
         components: {
             KestraFilter,
-            DataTable, LogLine, TopNavBar, Logs, NoData},
+            DataTable, LogLine, TopNavBar, Logs, LogsNoData},
         props: {
             logLevel: {
                 type: String,
@@ -237,6 +237,10 @@
 </script>
 <style lang="scss" scoped>
     @import "@kestra-io/ui-libs/src/scss/variables";
+
+    .shadow {
+        box-shadow: 0px 2px 4px 0px var(--ks-card-shadow);
+    }
 
     .log-panel {
         > div.log-content {

@@ -1,7 +1,6 @@
 package io.kestra.core.http.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.common.base.Charsets;
 import com.google.common.net.HttpHeaders;
 import io.kestra.core.exceptions.IllegalVariableEvaluationException;
 import io.kestra.core.http.HttpRequest;
@@ -12,6 +11,7 @@ import io.kestra.core.junit.annotations.KestraTest;
 import io.kestra.core.models.executions.Execution;
 import io.kestra.core.models.executions.LogEntry;
 import io.kestra.core.models.flows.Flow;
+import io.kestra.core.models.property.Property;
 import io.kestra.core.queues.QueueFactoryInterface;
 import io.kestra.core.queues.QueueInterface;
 import io.kestra.core.runners.RunContext;
@@ -39,6 +39,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junitpioneer.jupiter.RetryingTest;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -107,7 +108,7 @@ class HttpClientTest {
         return builder.build();
     }
 
-    @Test
+    @RetryingTest(5) // Flaky on CI but never locally even with 100 repetitions
     void getText() throws IllegalVariableEvaluationException, HttpClientException, IOException {
         Flow flow = TestsUtils.mockFlow();
         Execution execution = TestsUtils.mockExecution(flow, Map.of());
@@ -343,7 +344,7 @@ class HttpClientTest {
 
     @Test
     void noError404() throws IOException, IllegalVariableEvaluationException, HttpClientException {
-        try (HttpClient client = client(b -> b.configuration(HttpConfiguration.builder().allowFailed(true).build()))) {
+        try (HttpClient client = client(b -> b.configuration(HttpConfiguration.builder().allowFailed(Property.of(true)).build()))) {
             HttpResponse<Map<String, String>> response = client.request(HttpRequest.of(URI.create(embeddedServerUri + "/http/error?status=404")));
 
             assertThat(response.getStatus().getCode(), is(404));
@@ -355,11 +356,11 @@ class HttpClientTest {
         try (HttpClient client = client(b -> b
             .configuration(HttpConfiguration.builder()
                 .proxy(ProxyConfiguration.builder()
-                    .type(Proxy.Type.HTTP)
-                    .address(proxy.getHost())
-                    .username("pr0xy")
-                    .password("p4ss")
-                    .port(proxy.getFirstMappedPort())
+                    .type(Property.of(Proxy.Type.HTTP))
+                    .address(Property.of(proxy.getHost()))
+                    .username(Property.of("pr0xy"))
+                    .password(Property.of("p4ss"))
+                    .port(Property.of(proxy.getFirstMappedPort()))
                     .build())
                 .build()))
         ) {
@@ -419,7 +420,7 @@ class HttpClientTest {
                             try (var inputStream = fileUpload.getInputStream()) {
                                 sink.next(new AbstractMap.SimpleEntry<>(
                                     fileUpload.getName(),
-                                    IOUtils.toString(inputStream, Charsets.UTF_8)
+                                    IOUtils.toString(inputStream, StandardCharsets.UTF_8)
                                 ));
                             }
                         } catch (IOException e) {
